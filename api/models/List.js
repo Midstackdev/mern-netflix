@@ -5,6 +5,7 @@ const listSchema = mongoose.Schema({
     type: { type: String },
     genre: { type: String },
     content: { type: Array },
+    contains: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie', required: true }],
 }, 
     { timestamps: true }
 )
