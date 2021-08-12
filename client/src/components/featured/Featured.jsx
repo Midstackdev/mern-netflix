@@ -1,15 +1,29 @@
 import { InfoOutlined, PlayArrow } from '@material-ui/icons'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import './featured.scss'
 
-export default function Featured({ type }) {
+export default function Featured({ type, setGenre }) {
+    const [content, setContent] = useState(null)
+
+    useEffect(() => {
+        const getFeatured = async () => {
+            try {
+                const {data} = await axios.get(`movies/random?type=${type}`)
+                setContent(data[0])
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getFeatured()
+    }, [type])
     return (
         <div className="featured">
             {type && (
                 <div className="category">
-                    <span>{type === 'movie' ? 'Movies' : 'Series'}</span>
-                    <select name="genere" id="genre">
-                        <option>Genere</option>
+                    <span>{type === 'movies' ? 'Movies' : 'Series'}</span>
+                    <select name="genere" id="genre" onChange={e => setGenre(e.target.value)}>
+                        <option value="">Genere</option>
                         <option value="adventure">Adventure</option>
                         <option value="comedt">Comedy</option>
                         <option value="crime">Crime</option>
@@ -27,13 +41,13 @@ export default function Featured({ type }) {
             )}
             
             <img 
-                src="https://cdn.wallpapersafari.com/68/36/q36M2E.jpg" 
+                src={content?.img} 
                 alt="" 
             />
             <div className="info">
-                <img src="https://www.pnglib.com/wp-content/uploads/2021/02/gray-avengers-logo_6022329bd3d38.png" alt="" />
+                <img src={content?.imgTitle} alt="" />
                 <span className="desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea autem illum expedita vero repudiandae beatae odio consectetur sint nobis tenetur nisi, quasi at unde quibusdam illo iure nam quis consequuntur optio quisquam, laudantium soluta laborum laboriosam. Sequi rerum nobis ducimus!
+                    {content?.desc}
                 </span>
                 <div className="buttons">
                     <button className="play">

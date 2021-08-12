@@ -10,19 +10,28 @@ export const index = async(req, res) => {
             if(genreQuery) {
                 lists = await List.aggregate([
                     { $sample: { size: 10 } },
-                    { $match: { type: typeQuery, genre: genreQuery } }
+                    { $match: { type: typeQuery, genre: genreQuery } },
+                    { $lookup: { from: 'movies', localField: 'contains', foreignField: '_id', as: 'contains'}},
+                    // {
+                    //     $unwind: '$contains'
+                    // }
                 ])
 
             }else {
                 lists = await List.aggregate([
                     { $sample: { size: 10 } },
-                    { $match: { type: typeQuery } }
+                    { $match: { type: typeQuery } },
+                    { $lookup: { from: 'movies', localField: 'contains', foreignField: '_id', as: 'contains'}},
+                    // {
+                    //     $unwind: '$contains'
+                    // }
                 ])
             }
 
         }else {
             lists = await List.aggregate([
-                {$sample: {size: 10}}
+                {$sample: {size: 10}},
+                { $lookup: { from: 'movies', localField: 'contains', foreignField: '_id', as: 'contains'}},
             ])
         }
         
