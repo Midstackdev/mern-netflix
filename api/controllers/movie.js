@@ -1,7 +1,7 @@
 import Movie from '../models/Movie.js'
 
 export const index = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
 
         try {
             const movies = await Movie.find()
@@ -15,7 +15,7 @@ export const index = async(req, res) => {
 }
 
 export const create = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
         const newMovie = new Movie(req.body)
 
         try {
@@ -30,7 +30,7 @@ export const create = async(req, res) => {
 }
 
 export const update = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
 
         try {
             const movie = await Movie.findByIdAndUpdate(req.params.id, {
@@ -46,7 +46,7 @@ export const update = async(req, res) => {
 }
 
 export const remove = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
 
         try {
             await Movie.findByIdAndDelete(req.params.id)

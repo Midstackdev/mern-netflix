@@ -2,10 +2,10 @@ import User from "../models/User.js"
 import { encrypt } from "../utilities/crypto.js"
 
 export const index = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
         const query = req.query.new
         try {
-            const users = query ? await User.find().select('-password -__v').sort({ _id: -1 }).limit(10) : await User.find().select('-password -__v')
+            const users = query ? await User.find().select('-password -__v').sort({ _id: -1 }).limit(5) : await User.find().select('-password -__v')
             return res.status(200).json(users)
         } catch (error) {
             return res.status(500).json(error)
@@ -60,7 +60,7 @@ export const remove = async(req, res) => {
 }
 
 export const stats = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
         const today = new Date()
         const lastYear = today.setFullYear(today.setFullYear() - 1)
 
@@ -83,5 +83,5 @@ export const stats = async(req, res) => {
         }
         
     }
-    return res.status(403).json({ message: 'You can only update your items' })
+    return res.status(403).json({ message: 'Only admin users here' })
 }
