@@ -32,7 +32,7 @@ export default function Products() {
       { field: 'isSeries', headerName: 'Is series', width: 160},
       { field: 'action', headerName: 'Action', width: 160, renderCell: (params) => (
           <>
-            <Link to={`/products/${params.row._id}`}>
+            <Link to={{pathname: `/products/${params.row._id}`, movie: params.row }}>
                 <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline className="productListDelete" 
