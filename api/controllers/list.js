@@ -42,7 +42,7 @@ export const index = async(req, res) => {
 }
 
 export const create = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
         const newList = new List(req.body)
         try {
             const list = await newList.save()
@@ -55,7 +55,7 @@ export const create = async(req, res) => {
 }
 
 export const remove = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
         
         try {
             await List.findByIdAndDelete(req.params.id)
@@ -68,7 +68,7 @@ export const remove = async(req, res) => {
 }
 
 export const update = async(req, res) => {
-    if(!req.user.isAdmin) {
+    if(req.user.isAdmin) {
         
         try {
             await List.findByIdAndDelete(req.params.id)

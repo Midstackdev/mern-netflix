@@ -12,6 +12,9 @@ import axios from 'axios'
 import Login from './pages/login/Login';
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext/AuthContext';
+import Lists from './pages/lists/Lists';
+import List from './pages/list/List';
+import NewList from './pages/newList/List';
 
 const token  = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : null
 if(token){
@@ -37,6 +40,9 @@ function App() {
             <Route path="/users/new" component={() => ( !user ? <Redirect to="/login"/> : <NewUser/>)} exact/>
             <Route path="/users/:id" component={() => ( !user ? <Redirect to="/login"/> : <User/>)} exact/>
             <Route path="/movies" component={() => ( !user ? <Redirect to="/login"/> : <Products/>)} exact />
+            <Route path="/lists" component={() => ( !user ? <Redirect to="/login"/> : <Lists/>)} exact />
+            <Route path="/lists/:id" component={() => ( !user ? <Redirect to="/login"/> : <List/>)} exact />
+            <Route path="/list/new" component={() => ( !user ? <Redirect to="/login"/> : <NewList/>)} exact/>
             <Route path="/products/new" component={() => ( !user ? <Redirect to="/login"/> : <NewProduct/>)} exact/>
             <Route path="/products/:id" component={() => ( !user ? <Redirect to="/login"/> : <Product/>)} exact/>
         </div>
