@@ -24,18 +24,18 @@ export default function Featured({ type, setGenre }) {
                     <span>{type === 'movies' ? 'Movies' : 'Series'}</span>
                     <select name="genere" id="genre" onChange={e => setGenre(e.target.value)}>
                         <option value="">Genere</option>
-                        <option value="adventure">Adventure</option>
-                        <option value="comedt">Comedy</option>
-                        <option value="crime">Crime</option>
-                        <option value="fantasy">Fantasy</option>
-                        <option value="historical">Historical</option>
-                        <option value="horor">Horor</option>
-                        <option value="sci-fi">Sci-fi</option>
-                        <option value="thriller">Thriller</option>
-                        <option value="drama">Drama</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Historical">Historical</option>
+                        <option value="Horor">Horor</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Drama">Drama</option>
                         <option value="western">Western</option>
-                        <option value="animation">Animation</option>
-                        <option value="documentary">Documentary</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Documentary">Documentary</option>
                     </select>
                 </div>
             )}

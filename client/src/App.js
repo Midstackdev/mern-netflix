@@ -4,12 +4,19 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Watch from "./pages/watch/Watch";
 import axios from 'axios'
+import { useContext } from 'react';
+import { AuthContext } from './context/authContext/AuthContext';
 
-axios.defaults.headers.common['Authorization'] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZmY0ZTk5ODc3NGQ5Y2JjYThhNzZhNCIsImVtYWlsIjoibWVnQGdtLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2MjczNDQ1NDIsImV4cCI6MTYyOTkzNjU0Mn0.GXuB1cl7-pvbnpN7l_Wy3JPbmkicCmHzwVfnctlqMhA`;
+const token  =  localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'))?.token 
 
+if(token){
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}else {
+  axios.defaults.headers.common['Authorization'] = null;
+}
 
 function App() {
-  const user = true
+  const {user} = useContext(AuthContext)
   return (
     <Router>
       <div className="App">
